@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tap Tap Stars</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+}
+
+.top{
+    padding:15px;
+}
+
+button{
+    width:85%;
+    padding:15px;
+    margin:8px;
+    border-radius:15px;
+    border:0;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.star{
+    font-size:120px;
+    margin-top:30px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.star:active{
+    transform:scale(0.9);
+}
+
+#count{
+    color:#ffd700;
+    font-size:26px;
+}
+
+
+#menu{
+    display:none;
+    background:#222;
+    padding:15px;
+    margin:15px;
+    border-radius:20px;
+}
+
+
+#userBox{
+    display:none;
+}
+
+
+input{
+    width:80%;
+    padding:12px;
+    border-radius:10px;
+    border:0;
+    font-size:16px;
+}
+
+
+#msg{
+    margin:20px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="top">
+
+<button onclick="openMenu()">
+?? Stars chiqarish
+</button>
+
+</div>
+
+
+<h1>? Tap Tap Stars</h1>
+
+
+<div id="count">
+Bosilgan Stars: 0
+</div>
+
+
+<div class="star" onclick="tap()">
+?
+</div>
+
+
+
+<div id="menu">
+
+<h2>?? Chiqarish</h2>
+
+
+<button onclick="withdraw(1000000,100)">
+1 000 000 ? > 100 Stars
+</button>
+
+
+<button onclick="withdraw(5000000,250)">
+5 000 000 ? > 250 Stars
+</button>
+
+
+<button onclick="withdraw(7500000,450)">
+7 500 000 ? > 450 Stars
+</button>
+
+
+<button onclick="withdraw(9500000,700)">
+9 500 000 ? > 700 Stars
+</button>
+
+
+<button onclick="withdraw(12000000,1000)">
+12 000 000 ? > 1000 Stars
+</button>
+
+
+</div>
+
+
+
+<div id="userBox">
+
+<h3>Telegram username yozing</h3>
+
+<input id="username" placeholder="@username">
+
+<br><br>
+
+<button onclick="sendRequest()">
+? Yuborish
+</button>
+
+</div>
+
+
+
+<p id="msg"></p>
+
+
+
+<script>
+
+
+let stars = localStorage.getItem("stars") || 0;
+
+let reward = 0;
+
+
+document.getElementById("count").innerHTML =
+"Bosilgan Stars: " + stars;
+
+
+
+function tap(){
+
+stars++;
+
+localStorage.setItem("stars",stars);
+
+
+document.getElementById("count").innerHTML =
+"Bosilgan Stars: " + stars;
+
+}
+
+
+
+function openMenu(){
+
+document.getElementById("menu").style.display="block";
+
+}
+
+
+
+function withdraw(limit,amount){
+
+
+if(stars >= limit){
+
+reward = amount;
+
+document.getElementById("userBox").style.display="block";
+
+document.getElementById("msg").innerHTML =
+"";
+
+
+}else{
+
+
+document.getElementById("msg").innerHTML =
+"? Sizda yetarli bosilgan Stars yo‘q!";
+
+
+}
+
+
+}
+
+
+
+function sendRequest(){
+
+
+let username =
+document.getElementById("username").value;
+
+
+if(username==""){
+
+document.getElementById("msg").innerHTML =
+"? Username yozing!";
+
+return;
+
+}
+
+
+
+document.getElementById("msg").innerHTML =
+"? Ariza yuborildi!<br><br>"+
+"1 hafta ichida Stars tushadi.<br><br>"+
+"Agar arizalar ko‘payib ketsa va server yuklansa, muddat uzayishi mumkin.";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
